@@ -18,6 +18,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { QuestionDisplay } from "./QuestionDisplay";
 import QuizTitle from "./QuizTitle";
 import data from "../data/data.json";
+import ErrorMessage from "./ErrorMessage";
 
 export function QuizQuestion() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export function QuizQuestion() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false);
 
   const selectedQuiz: Quiz | undefined = data.quizzes.find(
     (quiz) => quiz.title === quizTitle,
@@ -56,6 +58,8 @@ export function QuizQuestion() {
   );
 
   const handleSubmit = () => {
+    setIsErrorVisible(false);
+
     if (selectedAnswer !== null) {
       const selectedOption = shuffledOptions[selectedAnswer];
 
@@ -65,6 +69,8 @@ export function QuizQuestion() {
       }
 
       setIsAnswerSubmitted(true);
+    } else {
+      setIsErrorVisible(true);
     }
   };
 
@@ -167,6 +173,7 @@ export function QuizQuestion() {
           >
             {isAnswerSubmitted ? "Next question" : "Submit answer"}
           </Button>
+          {isErrorVisible && <ErrorMessage />}
         </motion.div>
       </div>
     </>
