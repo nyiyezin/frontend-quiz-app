@@ -20,7 +20,7 @@ const quizSlice = createSlice({
   reducers: {
     setStartQuiz(state, action) {
       state.title = action.payload;
-      state.started = false;
+      state.started = true;
       state.currentQuestionIndex = 0;
     },
     setCurrentQuestionIndex(state, action) {
