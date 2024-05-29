@@ -819,14 +819,14 @@
           "answer": "The first letter of the function must be capitalized"
         },
         {
-          "question": "React separates the user interface into components. How are components combined to create a user interface?",
+          "question": "Describe the concept of Suspense in React and how it is used for data fetching?",
           "options": [
-            "By nesting components",
-            "By putting them in a folder structure",
-            "With webpack",
-            "With code splitting"
+            "Suspense allows for lazy loading of components, data fetching is handled with Promises.",
+            "Suspense provides a fallback UI while data is loading, used with async/await for data fetching",
+            "Suspense enables server-side rendering, data fetching happens on the client-side",
+            "Suspense is for error handling, data fetching is done with custom hooks"
           ],
-          "answer": "By nesting components"
+          "answer": "Suspense provides a fallback UI while data is loading, used with async/await for data fetching"
         },
         {
           "question": "Although React Hooks generally replace class components, there are no plans to remove classes from React.",
