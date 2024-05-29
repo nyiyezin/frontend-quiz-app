@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface QuizState {
   title: string;
@@ -18,12 +18,12 @@ const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {
-    setStartQuiz(state, action) {
+    setStartQuiz(state, action: PayloadAction<string>) {
       state.title = action.payload;
       state.started = true;
       state.currentQuestionIndex = 0;
     },
-    setCurrentQuestionIndex(state, action) {
+    setCurrentQuestionIndex(state, action: PayloadAction<number>) {
       state.currentQuestionIndex = action.payload;
     },
     incrementScore(state) {
