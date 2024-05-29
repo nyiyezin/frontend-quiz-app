@@ -1,8 +1,8 @@
-import motion from "framer-motion";
+import { motion } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import { Moon, Sun } from "lucide-react";
 
-export const ThemeSwitcher = () => {
+export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
