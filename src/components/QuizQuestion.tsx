@@ -34,9 +34,8 @@ export function QuizQuestion() {
   const selectedQuiz: Quiz | undefined = data.quizzes.find(
     (quiz) => quiz.title === quizTitle,
   );
-  console.log(selectedQuiz);
   const currentQuestion: Question | undefined =
-    selectedQuiz?.questions[questionIndex];
+    selectedQuiz?.questions[questionIndex as number];
 
   useEffect(() => {
     if (currentQuestion) {
@@ -77,7 +76,7 @@ export function QuizQuestion() {
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
     setIsCorrect(false);
-    const nextQuestionIndex = +questionIndex + 1;
+    const nextQuestionIndex = +(questionIndex as number) + 1;
     dispatch(setCurrentQuestionIndex(nextQuestionIndex));
 
     if (selectedQuiz && nextQuestionIndex < selectedQuiz.questions.length) {
@@ -88,7 +87,7 @@ export function QuizQuestion() {
   };
 
   const progress =
-    ((+questionIndex + 1) / (selectedQuiz?.questions.length || 1)) * 100;
+    ((+(questionIndex as number) + 1) / (selectedQuiz?.questions.length || 1)) * 100;
 
   return (
     <>
@@ -101,7 +100,7 @@ export function QuizQuestion() {
         <div className="flex max-h-[416px] w-full flex-col justify-between lg:w-auto">
           <div className="mb-6 flex flex-col gap-7 md:mb-10 lg:mb-0">
             <p className="select-all text-[0.88rem] italic text-grey-navy dark:text-light-bluish md:text-base">
-              Question {+questionIndex + 1} of {selectedQuiz?.questions.length}
+              Question {+(questionIndex as number) + 1} of {selectedQuiz?.questions.length}
             </p>
             <QuestionDisplay questionText={currentQuestion?.question} />
           </div>
