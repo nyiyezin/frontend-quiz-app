@@ -1,13 +1,17 @@
-import { useRef } from "react";
+import * as React from "react";
+import { useDispatch } from "react-redux";
 import { motion, useAnimate } from "framer-motion";
 import data from "../data/data.json";
 import { getClassname } from "../utils/util";
 import { Quiz } from "../utils/types";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { setStartQuiz } from "../redux/quizSlice";
+import { QuizQuestion } from "./QuizQuestion";
 
 export default function Home() {
+  const dispatch = useDispatch();
   const [, animate] = useAnimate();
-  const refs = useRef<HTMLLIElement[]>([]);
+  const refs = React.useRef<HTMLLIElement[]>([]);
 
   const sequence = (index: number) => {
     animate([
@@ -15,12 +19,18 @@ export default function Home() {
       [refs.current[index], { scale: 1 }],
     ]);
   };
-
   const visible = { opacity: 1, transition: { duration: 1 } };
-
   const itemVariants = {
     hidden: { opacity: 0 },
     visible,
+  };
+
+  const startQuiz = (quizTitle: string) => {
+    setTimeout(() => {
+      dispatch(setStartQuiz(quizTitle));
+    }, 1000);
+
+    return <QuizQuestion />;
   };
 
   return (
@@ -62,18 +72,18 @@ export default function Home() {
               key={title}
               className="transform cursor-pointer rounded-xl border-[3px] border-pure-white bg-pure-white shadow-light transition duration-300 ease-in-out hover:border-purple dark:border-navy dark:bg-navy dark:shadow-dark dark:hover:border-purple md:rounded-3xl"
               ref={(element) => {
-                if (index < refs.current.length) {
-                  refs.current[index] = element as HTMLLIElement;
-                } else {
-                  console.error(
-                    `Index ${index} is out of bounds for refs.current`,
-                  );
-                }
+                refs.current[index] = element as HTMLLIElement;
               }}
               onTap={() => sequence(index)}
               variants={itemVariants}
             >
-              <button className="flex w-full items-center gap-4 p-2 md:gap-8 lg:p-4">
+              <button
+                className="flex w-full items-center gap-4 p-2 md:gap-8 lg:p-4"
+                onClick={() => {
+                  startQuiz(title);
+                  console.log(startQuiz(title));
+                }}
+              >
                 <img
                   src={icon}
                   alt={`${title} icon`}
