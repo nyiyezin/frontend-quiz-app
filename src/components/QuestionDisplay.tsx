@@ -1,8 +1,4 @@
-export function QuestionDisplay({
-  questionText,
-}: {
-  questionText: string | undefined;
-}) {
+export function QuestionDisplay({ questionText }: { questionText: string }) {
   const renderTextWithNewlines = (text: string) => {
     return text.split("\n").map((line, index) => (
       <p
@@ -46,5 +42,5 @@ export function QuestionDisplay({
     return parts;
   };
 
-  return <div>{renderQuestion(questionText as string)}</div>;
+  return <div>{renderQuestion(questionText)}</div>;
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion, useAnimation } from "framer-motion";
 
-export default function ProgressBar({ progress }: { progress: number }) {
+export function ProgressBar({ progress }: { progress: number }) {
   const [prevProgress, setPrevProgress] = React.useState<number>();
   const controls = useAnimation();
 

@@ -1,14 +1,14 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { motion, useAnimate } from "framer-motion";
-import data from "../data/data.json";
+import { ThemeToggle } from "../components/ThemeToggle";
+import { QuizQuestion } from "./QuizQuestion";
 import { getClassname } from "../utils/util";
 import { Quiz } from "../utils/types";
-import { ThemeToggle } from "../components/ThemeToggle";
 import { setStartQuiz } from "../redux/quizSlice";
-import { QuizQuestion } from "./QuizQuestion";
+import data from "../data/data.json";
 
-export default function Home() {
+export function Home() {
   const dispatch = useDispatch();
   const [, animate] = useAnimate();
   const refs = React.useRef<HTMLLIElement[]>([]);
@@ -79,10 +79,7 @@ export default function Home() {
             >
               <button
                 className="flex w-full items-center gap-4 p-2 md:gap-8 lg:p-4"
-                onClick={() => {
-                  startQuiz(title);
-                  console.log(startQuiz(title));
-                }}
+                onClick={() => startQuiz(title)}
               >
                 <img
                   src={icon}

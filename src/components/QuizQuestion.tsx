@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { CircleCheck, CircleX } from "lucide-react";
+import { Button } from "./Button";
+import { ProgressBar } from "./ProgressBar";
+import { ThemeToggle } from "./ThemeToggle";
+import { QuestionDisplay } from "./QuestionDisplay";
+import { QuizTitle } from "./QuizTitle";
+import { ErrorMessage } from "./ErrorMessage";
 import {
   incrementScore,
   setCurrentQuestionIndex,
@@ -11,14 +17,7 @@ import {
   selectTitle,
   selectCurrentQuestionIndex,
 } from "../redux/quizSelectors";
-import { Question, Quiz } from "../utils/types";
-import Button from "./Button";
-import ProgressBar from "./ProgressBar";
-import { ThemeToggle } from "./ThemeToggle";
-import { QuestionDisplay } from "./QuestionDisplay";
-import QuizTitle from "./QuizTitle";
 import data from "../data/data.json";
-import ErrorMessage from "./ErrorMessage";
 
 export function QuizQuestion() {
   const dispatch = useDispatch();
@@ -31,52 +30,46 @@ export function QuizQuestion() {
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false);
 
-  const selectedQuiz: Quiz | undefined = data.quizzes.find(
-    (quiz) => quiz.title === quizTitle,
+  const selectedQuiz = data.quizzes.find((quiz) => quiz.title == quizTitle);
+  const currentQuestion = selectedQuiz?.questions[questionIndex as number];
+  const correctAnswerIndex = shuffledOptions.findIndex(
+    (option) => option === currentQuestion?.answer,
   );
-  const currentQuestion: Question | undefined =
-    selectedQuiz?.questions[questionIndex as number];
+  const progress =
+    (((questionIndex as number) + 1) / (selectedQuiz?.questions.length || 1)) *
+    100;
 
   useEffect(() => {
-    if (currentQuestion) {
-      const shuffled = [...currentQuestion.options];
-      shuffled.sort(() => Math.random() - 0.5);
-      setShuffledOptions(shuffled);
-    }
+    if (!currentQuestion) return;
+    const shuffled = [...currentQuestion.options];
+    shuffled.sort(() => Math.random() - 0.5);
+    setShuffledOptions(shuffled);
   }, [currentQuestion]);
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const optionIndex = +e.target.id;
-    if (!isAnswerSubmitted) {
-      setSelectedAnswer(optionIndex);
-    }
+    if (isAnswerSubmitted) return;
+    setSelectedAnswer(optionIndex);
   };
-
-  const correctAnswerIndex = shuffledOptions.findIndex(
-    (option) => option === currentQuestion?.answer,
-  );
 
   const handleSubmit = () => {
     setIsErrorVisible(false);
-
-    if (selectedAnswer !== null) {
-      const selectedOption = shuffledOptions[selectedAnswer];
-
-      if (selectedOption === currentQuestion?.answer) {
-        setIsCorrect(true);
-        dispatch(incrementScore());
-      }
-
-      setIsAnswerSubmitted(true);
-    } else {
+    if (selectedAnswer === null) {
       setIsErrorVisible(true);
+      return;
     }
+    const selectedOption = shuffledOptions[selectedAnswer];
+    if (selectedOption === currentQuestion?.answer) {
+      setIsCorrect(true);
+      dispatch(incrementScore());
+    }
+    setIsAnswerSubmitted(true);
   };
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
     setIsCorrect(false);
-    const nextQuestionIndex = +(questionIndex as number) + 1;
+    const nextQuestionIndex = (questionIndex as number) + 1;
     dispatch(setCurrentQuestionIndex(nextQuestionIndex));
 
     if (selectedQuiz && nextQuestionIndex < selectedQuiz.questions.length) {
@@ -86,8 +79,10 @@ export function QuizQuestion() {
     }
   };
 
-  const progress =
-    ((+(questionIndex as number) + 1) / (selectedQuiz?.questions.length || 1)) * 100;
+  if (!selectedQuiz || !currentQuestion) {
+    console.error("No Quiz Found!");
+    return;
+  }
 
   return (
     <>
@@ -100,7 +95,8 @@ export function QuizQuestion() {
         <div className="flex max-h-[416px] w-full flex-col justify-between lg:w-auto">
           <div className="mb-6 flex flex-col gap-7 md:mb-10 lg:mb-0">
             <p className="select-all text-[0.88rem] italic text-grey-navy dark:text-light-bluish md:text-base">
-              Question {+(questionIndex as number) + 1} of {selectedQuiz?.questions.length}
+              Question {+(questionIndex as number) + 1} of{" "}
+              {selectedQuiz?.questions.length}
             </p>
             <QuestionDisplay questionText={currentQuestion?.question} />
           </div>

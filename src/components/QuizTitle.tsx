@@ -1,10 +1,10 @@
 import { Quiz } from "../utils/types";
 import { getClassname } from "../utils/util";
 
-export default function QuizTitle({
+export function QuizTitle({
   selectedQuiz,
 }: {
-  selectedQuiz: Quiz | undefined;
+  selectedQuiz: Quiz;
 }) {
   return (
     <div className="flex items-center gap-4 text-xl font-medium md:gap-6">
