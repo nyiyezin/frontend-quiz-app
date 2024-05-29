@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Home from "./Home";
 import { selectStartedStatus, selectTitle } from "../redux/quizSelectors";
 import { QuizQuestion } from "./QuizQuestion";
+import { QuizResult } from "./QuizResult";
 
 export const Layout = () => {
   const isStarted = useSelector(selectStartedStatus);
@@ -14,6 +15,8 @@ export const Layout = () => {
           {!isStarted && quizTitle === "" && <Home />}
 
           {isStarted && <QuizQuestion />}
+
+          {!isStarted && quizTitle !== "" && <QuizResult />}
         </div>
       </div>
     </div>
