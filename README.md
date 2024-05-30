@@ -1,6 +1,4 @@
-# Frontend Mentor - Frontend Quiz App Solution
-
-This is a solution to the [Frontend quiz app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/frontend-quiz-app-BE7xkzXQnU).
+# Frontend Quiz App
 
 I used:
 ![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=flat)
@@ -8,7 +6,6 @@ I used:
 ![Redux Badge](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=fff&style=flat)
 ![Framer Badge](https://img.shields.io/badge/Framer-05F?logo=framer&logoColor=fff&style=flat)
 ![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat)
-![Vercel Badge](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=flat)
 
 ## Table of Contents
 
@@ -41,7 +38,7 @@ I used:
   [![GitHub Badge](https://img.shields.io/badge/GitHub-Frontend%20Quiz%20App-3F54A3?logo=github&logoColor=fff&style=flat)](https://github.com/nyiyezin/fem-frontend-quiz-app)
 
 - Live Site URL:
-  [![Vercel Badge](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=flat)](https://fem-frontend-quiz-npqfn0v48-nyz83s-projects.vercel.app/)
+  [![GitHub Badge](https://img.shields.io/badge/GitHub-Frontend%20Quiz%20App-3F54A3?logo=github&logoColor=fff&style=flat)](https://nyiyezin.github.io/fem-frontend-quiz-app/)
 
 ## My Process
 
