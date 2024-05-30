@@ -85,12 +85,12 @@ export default {
         ],
       },
       backgroundImage: {
-        "mobile-dark": "url('/assets/pattern-background-mobile-dark.svg')",
-        "tablet-dark": "url('/assets/pattern-background-tablet-dark.svg')",
-        "desktop-dark": "url('/assets/pattern-background-desktop-dark.svg')",
-        "mobile-light": "url('/assets/pattern-background-mobile-light.svg')",
-        "tablet-light": "url('/assets/pattern-background-tablet-light.svg')",
-        "desktop-light": "url('/assets/pattern-background-desktop-light.svg')",
+        "mobile-dark": "url('./assets/pattern-background-mobile-dark.svg')",
+        "tablet-dark": "url('./assets/pattern-background-tablet-dark.svg')",
+        "desktop-dark": "url('./assets/pattern-background-desktop-dark.svg')",
+        "mobile-light": "url('./assets/pattern-background-mobile-light.svg')",
+        "tablet-light": "url('./assets/pattern-background-tablet-light.svg')",
+        "desktop-light": "url('./assets/pattern-background-desktop-light.svg')",
       },
       boxShadow: {
         dark: "0 16px 40px 0 rgba(49, 62, 81, 0.14)",
